@@ -96,6 +96,7 @@ minerals = {
     "Lithium Battery": "lithium_exim.csv",
     "Lithium Oxide": "lithium_oxide_exim.csv",
     "Copper": "copper_exim.csv",
+    "Copper_ores": "copper_ores_exim.csv",
     "Graphite": "graphite_exim.csv",
     "Artificial Graphite": "artificial_graphite_exim.csv"
 }
@@ -155,6 +156,7 @@ fig_dependency.update_layout(
 st.plotly_chart(fig_dependency, use_container_width=True)
 
 st.caption("NIT Agartala | TECH MINERS | Real EXIM Data ")
+
 
 
 
