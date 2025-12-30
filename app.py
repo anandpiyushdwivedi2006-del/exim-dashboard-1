@@ -3,18 +3,6 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 import numpy as np
-st.markdown("""
-    <style>
-    .stApp {
-        background-color: #f0f8ff;  /* Alice Blue - light blue */
-    }
-    .main .block-container {
-        background-color: #f8f9fa;  /* Light gray */
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-    }
-    </style>
-""", unsafe_allow_html=True)
 
 st.set_page_config(page_title="Mineral EXIM Dashboard by TECH MINERS", layout="wide")
 st.title("🪨 IN Mineral Import-Export & Dependency Dashboard")
@@ -93,4 +81,5 @@ fig_dependency.update_layout(
 st.plotly_chart(fig_dependency, use_container_width=True)
 
 st.caption("NIT Agartala | TECH MINERS | Real EXIM Data ")
+
 
