@@ -6,18 +6,78 @@ import numpy as np
 
 st.markdown("""
 <style>
-    [data-testid="stAppViewContainer"] { 
-        background-color: #0e1117; 
+    /* Main Container - MLC Dark Gradient */
+    [data-testid="stAppViewContainer"] {
+        background: linear-gradient(135deg, #0c0c1a 0%, #1a1a2e 50%, #16213e 100%);
+        backdrop-filter: blur(10px);
     }
-    .block-container { 
-        padding-top: 1rem; 
-        padding-left: 1rem; 
-        color: #e4e7eb;
+    
+    /* Content Padding & Glass Effect */
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        background: rgba(30, 31, 43, 0.4);
+        border-radius: 20px;
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 25px 45px rgba(0,0,0,0.3);
     }
-    .stDataFrame { 
-        background-color: #1e1f2b; 
+    
+    /* Metric Cards - Neon Glow */
+    .stMetric {
+        background: linear-gradient(145deg, rgba(59,130,246,0.2), rgba(16,185,129,0.2));
+        border-radius: 15px;
+        padding: 1rem;
+        border: 1px solid rgba(59,130,246,0.3);
+        box-shadow: 0 10px 30px rgba(59,130,246,0.1);
     }
-</style> """, unsafe_allow_html=True)
+    
+    /* DataFrame - Modern Table */
+    .stDataFrame {
+        background: rgba(30,31,43,0.8);
+        border-radius: 12px;
+        border: 1px solid rgba(59,130,246,0.2);
+        backdrop-filter: blur(10px);
+    }
+    
+    /* Charts - Glass Cards */
+    .stPlotlyChart {
+        background: rgba(30,31,43,0.6);
+        border-radius: 16px;
+        border: 1px solid rgba(16,185,129,0.3);
+        padding: 1rem;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    
+    /* Title Animation */
+    h1, h2, h3 {
+        background: linear-gradient(45deg, #3b82f6, #10b981, #f59e0b);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+    
+    @keyframes titleGlow {
+        0% { filter: drop-shadow(0 0 5px #3b82f6); }
+        100% { filter: drop-shadow(0 0 20px #10b981); }
+    }
+    
+    /* Button Hover Effects */
+    .stButton > button {
+        background: linear-gradient(45deg, #3b82f6, #1e40af);
+        border-radius: 12px;
+        border: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(59,130,246,0.3);
+    }
+    .stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(59,130,246,0.5);
+    }
+</style>""", unsafe_allow_html=True)
 st.set_page_config(page_title="Mineral EXIM Dashboard by TECH MINERS", layout="wide")
 st.title("🪨 IN Mineral Import-Export & Dependency Dashboard")
 
@@ -95,6 +155,7 @@ fig_dependency.update_layout(
 st.plotly_chart(fig_dependency, use_container_width=True)
 
 st.caption("NIT Agartala | TECH MINERS | Real EXIM Data ")
+
 
 
 
