@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
+import plotly.express as px
 import numpy as np
 
 st.set_page_config(page_title="Mineral EXIM Dashboard", layout="wide")
@@ -14,14 +15,13 @@ def load_data(path):
     df['Import_value(in cr.)'] = df['Import_value(in cr.)'].astype(str).str.replace(',', '').astype(float)
     df['Export_value(in cr.)'] = df['Export_value(in cr.)'].astype(str).str.replace(',', '').astype(float)
     df['dependency'] = df['Import_value(in cr.)'] / df['Export_value(in cr.)']
+    df['export_dependency'] = df['Export_value(in cr.)'] / df['Import_value(in cr.)']
     return df.sort_values('Year').reset_index(drop=True)
 
-# YOUR EXACT FILENAMES [file:326]
 minerals = {
     "Lithium Battery": "lithium_exim.csv",
     "Lithium Oxide": "lithium_oxide_exim.csv",
     "Copper": "copper_exim.csv",
-    "Copper_ores": "copper_ores_exim.csv",
     "Graphite": "graphite_exim.csv",
     "Artificial Graphite": "artificial_graphite_exim.csv"
 }
@@ -44,13 +44,13 @@ with col2:
     imp_forecast = [imp[-1]*1.08, imp[-1]*1.15, imp[-1]*1.22]
     exp_forecast = [exp[-1]*1.05, exp[-1]*1.12, exp[-1]*1.18]
     
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=years, y=imp, name='Import Actual', line=dict(color='blue')))
-    fig.add_trace(go.Scatter(x=years, y=exp, name='Export Actual', line=dict(color='orange')))
-    fig.add_trace(go.Scatter(x=future_years, y=imp_forecast, name='Import Forecast', line=dict(color='blue', dash='dash')))
-    fig.add_trace(go.Scatter(x=future_years, y=exp_forecast, name='Export Forecast', line=dict(color='orange', dash='dash')))
-    fig.update_layout(title="ARIMA-Style Forecast", xaxis_title="Year", yaxis_title="₹ Cr")
-    st.plotly_chart(fig, use_container_width=True)
+    fig_forecast = go.Figure()
+    fig_forecast.add_trace(go.Scatter(x=years, y=imp, name='Import Actual', line=dict(color='blue')))
+    fig_forecast.add_trace(go.Scatter(x=years, y=exp, name='Export Actual', line=dict(color='orange')))
+    fig_forecast.add_trace(go.Scatter(x=future_years, y=imp_forecast, name='Import Forecast', line=dict(color='blue', dash='dash')))
+    fig_forecast.add_trace(go.Scatter(x=future_years, y=exp_forecast, name='Export Forecast', line=dict(color='orange', dash='dash')))
+    fig_forecast.update_layout(title="ARIMA-Style Forecast", xaxis_title="Year", yaxis_title="₹ Cr")
+    st.plotly_chart(fig_forecast, use_container_width=True)
 
 st.subheader("🔮 Forecast Table")
 forecast_df = pd.DataFrame({
@@ -62,5 +62,22 @@ forecast_df = pd.DataFrame({
 })
 st.dataframe(forecast_df)
 
-st.caption("NIT Agartala | TECH MINERS| Real EXIM Data")
+# ✅ DEPENDENCY GRAPH (Your tech.py version)
+st.subheader("⚖️ Dependency Analysis")
+fig_dependency = go.Figure()
+fig_dependency.add_trace(go.Scatter(x=df['Year'], y=df['dependency'], 
+                                   mode='lines+markers', name='Import Dependency (Imp/Exp)', 
+                                   line=dict(color='blue', width=3), marker=dict(size=8)))
+fig_dependency.add_trace(go.Scatter(x=df['Year'], y=df['export_dependency'], 
+                                   mode='lines+markers', name='Export Dependency (Exp/Imp)', 
+                                   line=dict(color='green', width=3), marker=dict(size=8)))
+fig_dependency.update_layout(
+    title=f"{choice} Import & Export Dependency Ratios",
+    xaxis_title="Year", 
+    yaxis_title="Dependency Ratio",
+    template="plotly_white",
+    height=400
+)
+st.plotly_chart(fig_dependency, use_container_width=True)
 
+st.caption("NIT Agartala | TECH MINERS | Real EXIM Data ")
