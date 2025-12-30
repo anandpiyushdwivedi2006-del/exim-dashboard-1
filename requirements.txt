@@ -2,6 +2,9 @@ streamlit
 pandas
 numpy
 plotly
+matplotlib==3.5.1
+statsmodels==0.13.5
+
 
 
 
