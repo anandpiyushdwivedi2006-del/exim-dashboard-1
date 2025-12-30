@@ -21,6 +21,7 @@ minerals = {
     "Lithium Battery": "lithium_exim.csv",
     "Lithium Oxide": "lithium_oxide_exim.csv",
     "Copper": "copper_exim.csv",
+    "Copper_ores": "copper_ores_exim.csv",
     "Graphite": "graphite_exim.csv",
     "Artificial Graphite": "artificial_graphite_exim.csv"
 }
@@ -61,4 +62,5 @@ forecast_df = pd.DataFrame({
 })
 st.dataframe(forecast_df)
 
-st.caption("NIT Agartala | Falcons Hackathon | Real EXIM Data")
+st.caption("NIT Agartala | TECH MINERS| Real EXIM Data")
+
