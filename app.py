@@ -3,8 +3,20 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 import numpy as np
+st.markdown("""
+    <style>
+    .stApp {
+        background-color: #f0f8ff;  /* Alice Blue - light blue */
+    }
+    .main .block-container {
+        background-color: #f8f9fa;  /* Light gray */
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
-st.set_page_config(page_title="Mineral EXIM Dashboard", layout="wide")
+st.set_page_config(page_title="Mineral EXIM Dashboard by TECH MINERS", layout="wide")
 st.title("🪨 IN Mineral Import-Export & Dependency Dashboard")
 
 @st.cache_data
@@ -45,10 +57,10 @@ with col2:
     exp_forecast = [exp[-1]*1.05, exp[-1]*1.12, exp[-1]*1.18]
     
     fig_forecast = go.Figure()
-    fig_forecast.add_trace(go.Scatter(x=years, y=imp, name='Import Actual', line=dict(color='blue')))
-    fig_forecast.add_trace(go.Scatter(x=years, y=exp, name='Export Actual', line=dict(color='orange')))
-    fig_forecast.add_trace(go.Scatter(x=future_years, y=imp_forecast, name='Import Forecast', line=dict(color='blue', dash='dash')))
-    fig_forecast.add_trace(go.Scatter(x=future_years, y=exp_forecast, name='Export Forecast', line=dict(color='orange', dash='dash')))
+    fig_forecast.add_trace(go.Scatter(x=years, y=imp, name='Import Actual value(in cr.)', line=dict(color='blue')))
+    fig_forecast.add_trace(go.Scatter(x=years, y=exp, name='Export Actual value (in cr.)', line=dict(color='orange')))
+    fig_forecast.add_trace(go.Scatter(x=future_years, y=imp_forecast, name='Import Forecast value (in cr.)', line=dict(color='blue', dash='dash')))
+    fig_forecast.add_trace(go.Scatter(x=future_years, y=exp_forecast, name='Export Forecast value (in cr.)', line=dict(color='orange', dash='dash')))
     fig_forecast.update_layout(title="ARIMA-Style Forecast", xaxis_title="Year", yaxis_title="₹ Cr")
     st.plotly_chart(fig_forecast, use_container_width=True)
 
@@ -81,3 +93,4 @@ fig_dependency.update_layout(
 st.plotly_chart(fig_dependency, use_container_width=True)
 
 st.caption("NIT Agartala | TECH MINERS | Real EXIM Data ")
+
